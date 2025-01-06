@@ -1,5 +1,7 @@
 const puppeteer = require('puppeteer');
+const axios = require('axios'); // Apenas uma importação de axios
 
+// Navegar usando Puppeteer
 (async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
@@ -13,25 +15,6 @@ const puppeteer = require('puppeteer');
 
   await browser.close();
 })();
-
-
-const axios = require('axios');
-
-const headers = {
-  Authorization: `Bearer ${process.env.API_TOKEN}`,
-  'User-Agent': 'PostmanRuntime/7.29.2' // Pode usar um User-Agent comum como o do Postman
-};
-
-axios.post('https://hml-api-multi.siteteste.inf.br/service-gateway/api/merchant', data, { headers })
-  .then(response => {
-    console.log('Resposta da API:', response.data);
-  })
-  .catch(error => {
-    console.error('Erro ao fazer a requisição:', error.response?.data || error.message);
-  });
-
-
-const axios = require("axios");
 
 // Função para gerar um CNPJ válido
 function gerarCNPJ() {
