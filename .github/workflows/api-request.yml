@@ -1,28 +1,28 @@
-name: Run API Request
+name: API Request with Postman & Puppeteer
 
 on:
   push:
     branches:
       - main
-  pull_request:
 
 jobs:
-  run-api-request:
+  build:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout Code
-      uses: actions/checkout@v3
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-    - name: Setup Node.js
+    - name: Set up Node.js
       uses: actions/setup-node@v3
       with:
-        node-version: 18
+        node-version: '18'
 
-    - name: Install Dependencies
-      run: npm install axios
+    - name: Install dependencies
+      run: |
+        npm install
 
-    - name: Run API Request
-      env:
-        API_TOKEN: ${{ secrets.API_TOKEN }} # Token seguro configurado no GitHub Secrets
+    - name: Run the request script
       run: node request.js
+      env:
+        API_TOKEN: ${{ secrets.API_TOKEN }}  
