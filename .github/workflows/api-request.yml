@@ -1,0 +1,28 @@
+name: Run API Request
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+
+jobs:
+  run-api-request:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout Code
+      uses: actions/checkout@v3
+
+    - name: Setup Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: 18
+
+    - name: Install Dependencies
+      run: npm install axios
+
+    - name: Run API Request
+      env:
+        API_TOKEN: ${{ secrets.API_TOKEN }} # Token seguro configurado no GitHub Secrets
+      run: node request.js
