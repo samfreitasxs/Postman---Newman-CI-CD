@@ -1,3 +1,36 @@
+const puppeteer = require('puppeteer');
+
+(async () => {
+  const browser = await puppeteer.launch();
+  const page = await browser.newPage();
+
+  // Navega até a página protegida pelo Cloudflare
+  await page.goto('https://hml-api-multi.siteteste.inf.br/service-gateway/api/merchant');
+
+  // Extraia cookies ou tokens se necessário
+  const cookies = await page.cookies();
+  console.log(cookies);
+
+  await browser.close();
+})();
+
+
+const axios = require('axios');
+
+const headers = {
+  Authorization: `Bearer ${process.env.API_TOKEN}`,
+  'User-Agent': 'PostmanRuntime/7.29.2' // Pode usar um User-Agent comum como o do Postman
+};
+
+axios.post('https://hml-api-multi.siteteste.inf.br/service-gateway/api/merchant', data, { headers })
+  .then(response => {
+    console.log('Resposta da API:', response.data);
+  })
+  .catch(error => {
+    console.error('Erro ao fazer a requisição:', error.response?.data || error.message);
+  });
+
+
 const axios = require("axios");
 
 // Função para gerar um CNPJ válido
